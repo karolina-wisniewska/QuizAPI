@@ -11,9 +11,4 @@ spring:
       hibernate:
         format_sql: true
 quiz-api:
-  url: https://quizapi.io/api/v1/questions?apiKey=NQJpUGZ7hs2FpzZuytJiwGvL31eWD010eANEPZEi
-  params:
-    - name: apiKey
-      value: NQJpUGZ7hs2FpzZuytJiwGvL31eWD010eANEPZEi
-    - name: limit
-      value: 1
+  url: https://quizapi.io/api/v1/questions?apiKey=NQJpUGZ7hs2FpzZuytJiwGvL31eWD010eANEPZEi&limit=1
