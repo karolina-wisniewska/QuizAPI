@@ -13,8 +13,9 @@ public class ProviderServiceImpl implements ProviderService {
   private final QuizProperties quizProperties;
 
   @Override
-  public void getData() {
+  public QuestionDto getData() {
     RestTemplate restTemplate = new RestTemplate();
-    QuestionDto[] questionDto = restTemplate.getForObject(quizProperties.getUrl(), QuestionDto[].class);
+    QuestionDto[] questionDtoResource = restTemplate.getForObject(quizProperties.getUrl(), QuestionDto[].class);
+    return questionDtoResource[0];
   }
 }
