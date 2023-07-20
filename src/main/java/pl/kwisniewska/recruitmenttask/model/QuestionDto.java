@@ -1,21 +1,19 @@
 package pl.kwisniewska.recruitmenttask.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import pl.kwisniewska.recruitmenttask.entity.Answer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class QuestionDto {
 
   private Long id;
 
   private String question;
 
-  private List<AnswerDto> answers;
+  private AnswersDto answers;
 
+  @JsonProperty("correct_answers")
+  private CorrectAnswersDto correctAnswers;
 }
