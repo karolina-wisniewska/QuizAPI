@@ -5,12 +5,12 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ShowQuestionDto {
+public class QuestionToShowDto {
 
   private Long id;
 
   private String question;
 
-  private List<ShowAnswerDto> answers;
+  private List<AnswerToShowDto> answers;
 
 }
