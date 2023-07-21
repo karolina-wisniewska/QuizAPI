@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.model.AnswerToShowDto;
+import pl.kwisniewska.recruitmenttask.model.CheckDto;
 import pl.kwisniewska.recruitmenttask.model.QuestionToShowDto;
 
 import java.util.List;
@@ -29,5 +30,11 @@ public class EntityToDtoConverter {
             .collect(Collectors.toList());
     questionToShowDto.setAnswers(answerDtos);
     return questionToShowDto;
+  }
+
+  public CheckDto convertBooleanToCheckDto(boolean isPassed) {
+    CheckDto checkDto = new CheckDto();
+    checkDto.setCorrect(isPassed);
+    return checkDto;
   }
 }
