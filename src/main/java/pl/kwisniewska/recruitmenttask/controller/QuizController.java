@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.kwisniewska.recruitmenttask.converter.EntityToDtoConverter;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.model.AnswerToCheckDto;
+import pl.kwisniewska.recruitmenttask.model.CheckDto;
 import pl.kwisniewska.recruitmenttask.model.QuestionToShowDto;
 import pl.kwisniewska.recruitmenttask.service.QuestionService;
+
+import java.util.Set;
 
 @RestController
 @Transactional
@@ -31,8 +34,13 @@ public class QuizController {
   }
 
   @PostMapping(value = "/answers")
-  public String answerQuestion(AnswerToCheckDto answerToCheckDto){
+  public ResponseEntity<CheckDto> answerQuestion(AnswerToCheckDto answerToCheckDto){
+    Long questionId = answerToCheckDto.getQuestionId();
+    Set<Long> answers = answerToCheckDto.getAnswers();
 
-    return "My answer";
+    boolean isPassed = questionService.isQuestionPassed(questionId, answers);
+    CheckDto checkDto = converter.convertBooleanToCheckDto(isPassed);
+
+    return new ResponseEntity(checkDto, HttpStatus.OK);
   }
 }
