@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,5 +26,5 @@ public class Question {
 
   @OneToMany
   @JoinColumn(name = "question_id")
-  private List<Answer> answers = new ArrayList<>();
+  private List<Answer> answers;
 }
