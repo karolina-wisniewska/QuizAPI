@@ -2,11 +2,11 @@ package pl.kwisniewska.recruitmenttask.model;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class AnswerToCheckDto {
 
-  private List<Long> answers;
+  private Set<Long> answers;
   private Long questionId;
 }
