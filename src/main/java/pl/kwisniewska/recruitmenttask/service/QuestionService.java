@@ -6,6 +6,8 @@ import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.repository.QuestionRepository;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +24,24 @@ public class QuestionService {
               }
             });
     return questionRepository.save(question);
+  }
+
+  private Optional<Question> findById(Long id) {
+    return questionRepository.findById(id);
+  }
+
+  private long count(){
+    return questionRepository.count();
+  }
+
+  public Optional<Question> getRandom(){
+    Long randomIndex = getRandomIndex();
+    return findById(randomIndex);
+  }
+
+  private Long getRandomIndex(){
+    long size = count();
+    Random random = new Random();
+    return random.nextLong(size) + 1;
   }
 }
