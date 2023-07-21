@@ -2,12 +2,15 @@ package pl.kwisniewska.recruitmenttask.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.repository.QuestionRepository;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +45,12 @@ public class QuestionService {
     return random.nextLong(size) + 1;
   }
 
+  public boolean isQuestionPassed(Long questionId, Set<Long> answerIds) {
+    Set<Answer> correctAnswers = answerService.findCorrectAnswersByQuestionId(questionId);
+    Set<Long> correctAnswerIds = correctAnswers.stream()
+            .map(answer -> answer.getId())
+            .collect(Collectors.toSet());
+    return correctAnswerIds.equals(answerIds);
+  }
 
 }
