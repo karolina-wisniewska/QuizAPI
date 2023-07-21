@@ -37,12 +37,12 @@ public class ProviderConverter {
 
     Answer answerE = new Answer();
     answerE.setAnswer(answersDto.getAnswerE());
-    answerE.setCorrect(correctAnswersDto.getIsBCorrect());
+    answerE.setCorrect(correctAnswersDto.getIsECorrect());
     answers.add(answerE);
 
     Answer answerF = new Answer();
-    answerF.setAnswer(answersDto.getAnswerB());
-    answerF.setCorrect(correctAnswersDto.getIsBCorrect());
+    answerF.setAnswer(answersDto.getAnswerF());
+    answerF.setCorrect(correctAnswersDto.getIsFCorrect());
     answers.add(answerF);
 
     return answers;

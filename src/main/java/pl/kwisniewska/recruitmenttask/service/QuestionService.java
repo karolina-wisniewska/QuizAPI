@@ -18,11 +18,8 @@ public class QuestionService {
 
   public Question save(Question question) {
     question.getAnswers().stream()
-            .forEach(answer -> {
-              if(Objects.nonNull(answer.getAnswer())){
-                answerService.save(answer);
-              }
-            });
+            .filter(answer -> Objects.nonNull(answer.getAnswer()))
+            .forEach(answer -> answerService.save(answer));
     return questionRepository.save(question);
   }
 
@@ -44,4 +41,6 @@ public class QuestionService {
     Random random = new Random();
     return random.nextLong(size) + 1;
   }
+
+
 }
