@@ -2,16 +2,18 @@ package pl.kwisniewska.recruitmenttask.converter;
 
 import org.springframework.stereotype.Component;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
-import pl.kwisniewska.recruitmenttask.model.AnswersDto;
-import pl.kwisniewska.recruitmenttask.model.CorrectAnswersDto;
+import pl.kwisniewska.recruitmenttask.entity.Question;
+import pl.kwisniewska.recruitmenttask.provider.model.AnswersDto;
+import pl.kwisniewska.recruitmenttask.provider.model.CorrectAnswersDto;
+import pl.kwisniewska.recruitmenttask.provider.model.QuestionDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AnswersDtoToAnswerListConverter {
+public class ProviderConverter {
 
-  public List<Answer> convert(AnswersDto answersDto, CorrectAnswersDto correctAnswersDto) {
+  public List<Answer> convertAnswersDtosToAnswerList(AnswersDto answersDto, CorrectAnswersDto correctAnswersDto) {
     List<Answer> answers = new ArrayList<>();
     Answer answerA = new Answer();
     answerA.setAnswer(answersDto.getAnswerA());
@@ -44,6 +46,20 @@ public class AnswersDtoToAnswerListConverter {
     answers.add(answerF);
 
     return answers;
+  }
+
+  public Question convertQuestionDtoToQuestion(QuestionDto questionDto) {
+    Question question = new Question();
+    question.setApiId(questionDto.getId());
+    question.setQuestion(questionDto.getQuestion());
+
+    AnswersDto answersDto = questionDto.getAnswers();
+    CorrectAnswersDto correctAnswersDto = questionDto.getCorrectAnswers();
+    List<Answer> answers = convertAnswersDtosToAnswerList(answersDto, correctAnswersDto);
+
+    question.setAnswers(answers);
+
+    return question;
   }
 
 }

@@ -1,4 +1,4 @@
-package pl.kwisniewska.recruitmenttask.model;
+package pl.kwisniewska.recruitmenttask.provider.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

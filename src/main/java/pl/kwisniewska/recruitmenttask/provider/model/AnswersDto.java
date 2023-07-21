@@ -1,13 +1,12 @@
-package pl.kwisniewska.recruitmenttask.model;
+package pl.kwisniewska.recruitmenttask.provider.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnswersDto {
 
   @JsonProperty("answer_a")
