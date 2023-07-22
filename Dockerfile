@@ -1,4 +1,9 @@
-FROM maven:3.8.4-openjdk-17 AS build
+FROM openjdk:17-alpine3.14
+
+RUN apk update && apk upgrade && \
+    apk add \
+    git \
+    maven
 
 RUN mkdir /code
 COPY ./ /code
@@ -8,6 +13,10 @@ RUN cd /code && \
      mv /code/target/RecruitmentTask-0.0.1-SNAPSHOT.jar /opt/app && \
      cd / && \
      rm -r /code
+
+RUN apk del \
+    git \
+    maven
 
 EXPOSE 8080
 
