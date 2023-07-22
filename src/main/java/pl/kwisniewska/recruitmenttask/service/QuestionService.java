@@ -39,6 +39,10 @@ public class QuestionService {
     return findById(randomIndex);
   }
 
+  // Jeżeli nie można założyć, że identyfikatory są narastające i nie da się ich usuwać, można przykładowo:
+  // 1. Pobrać z bazy wszystkie pytania do kolekcji 'availableQuestions'
+  // 2. Wylosować liczbę 'randomId' z zakresu <1, rozmiar kolekcji 'availableQuestions'>
+  // 3. Pobrać i zwrócić wartość 'questionId'' z pozycji 'randomId'
   private Long getRandomIndex(){
     long size = count();
     Random random = new Random();
@@ -52,5 +56,4 @@ public class QuestionService {
             .collect(Collectors.toSet());
     return correctAnswerIds.equals(answerIds);
   }
-
 }
