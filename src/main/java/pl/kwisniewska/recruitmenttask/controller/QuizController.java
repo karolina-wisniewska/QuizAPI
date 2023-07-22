@@ -22,6 +22,7 @@ import pl.kwisniewska.recruitmenttask.service.QuestionService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @RestController
@@ -44,7 +45,6 @@ public class QuizController {
   public ResponseEntity<CheckDto> answerQuestion(@Valid @RequestBody AnswerToCheckDto answerToCheckDto) {
     Long questionId = answerToCheckDto.getQuestionId();
     Set<Long> answers = answerToCheckDto.getAnswers();
-
     boolean isPassed = questionService.isQuestionPassed(questionId, answers);
     CheckDto checkDto = converter.convertBooleanToCheckDto(isPassed);
 
@@ -61,5 +61,11 @@ public class QuizController {
       errors.put(fieldName, errorMessage);
     });
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(NoSuchElementException.class)
+  public ResponseEntity<String> handleQuestionNotFoundExceptions() {
+    String message = "Question not found";
+    return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
   }
 }
