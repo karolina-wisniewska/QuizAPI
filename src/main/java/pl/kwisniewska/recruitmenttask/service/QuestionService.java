@@ -6,8 +6,8 @@ import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.repository.QuestionRepository;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,15 +26,15 @@ public class QuestionService {
     return questionRepository.save(question);
   }
 
-  private Optional<Question> findById(Long id) {
-    return questionRepository.findById(id);
+  private Question findById(Long id) {
+    return questionRepository.findById(id).orElseThrow(NoSuchElementException::new);
   }
 
   private long count(){
     return questionRepository.count();
   }
 
-  public Optional<Question> getRandom(){
+  public Question getRandomQuestion(){
     Long randomIndex = getRandomIndex();
     return findById(randomIndex);
   }
@@ -44,9 +44,9 @@ public class QuestionService {
   // 2. Wylosować liczbę 'randomId' z zakresu <1, rozmiar kolekcji 'availableQuestions'>
   // 3. Pobrać i zwrócić wartość 'questionId'' z pozycji 'randomId'
   private Long getRandomIndex(){
-    long size = count();
+    int size = (int) count();
     Random random = new Random();
-    return random.nextLong(size) + 1;
+    return (long) (random.nextInt(size) + 1);
   }
 
   public boolean isQuestionPassed(Long questionId, Set<Long> answerIds) {
