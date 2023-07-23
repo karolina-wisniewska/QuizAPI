@@ -3,49 +3,30 @@ package pl.kwisniewska.recruitmenttask.converter;
 import org.springframework.stereotype.Component;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
-import pl.kwisniewska.recruitmenttask.provider.model.AnswersDto;
-import pl.kwisniewska.recruitmenttask.provider.model.CorrectAnswersDto;
 import pl.kwisniewska.recruitmenttask.provider.model.QuestionDto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ProviderConverter {
 
-  public List<Answer> convertAnswersDtosToAnswerList(AnswersDto answersDto, CorrectAnswersDto correctAnswersDto) {
-    List<Answer> answers = new ArrayList<>();
-    Answer answerA = new Answer();
-    answerA.setAnswer(answersDto.getAnswerA());
-    answerA.setCorrect(correctAnswersDto.getIsACorrect());
-    answers.add(answerA);
+  public List<Answer> convertAnswersDtosToAnswerList(Map<String, String> answers, Map<String, Boolean> correctAnswers) {
+    List<Answer> answersList = new ArrayList<>();
+    Iterator<Map.Entry<String, String>> iter1 = answers.entrySet().iterator();
+    Iterator<Map.Entry<String, Boolean>> iter2 = correctAnswers.entrySet().iterator();
+    while(iter1.hasNext() && iter2.hasNext()) {
+      Map.Entry<String, String> e1 = iter1.next();
+      Map.Entry<String, Boolean> e2 = iter2.next();
+      Answer answer = new Answer();
+      answer.setAnswer(e1.getValue());
+      answer.setCorrect(e2.getValue());
+      answersList.add(answer);
+    }
 
-    Answer answerB = new Answer();
-    answerB.setAnswer(answersDto.getAnswerB());
-    answerB.setCorrect(correctAnswersDto.getIsBCorrect());
-    answers.add(answerB);
-
-    Answer answerC = new Answer();
-    answerC.setAnswer(answersDto.getAnswerC());
-    answerC.setCorrect(correctAnswersDto.getIsCCorrect());
-    answers.add(answerC);
-
-    Answer answerD = new Answer();
-    answerD.setAnswer(answersDto.getAnswerD());
-    answerD.setCorrect(correctAnswersDto.getIsDCorrect());
-    answers.add(answerD);
-
-    Answer answerE = new Answer();
-    answerE.setAnswer(answersDto.getAnswerE());
-    answerE.setCorrect(correctAnswersDto.getIsECorrect());
-    answers.add(answerE);
-
-    Answer answerF = new Answer();
-    answerF.setAnswer(answersDto.getAnswerF());
-    answerF.setCorrect(correctAnswersDto.getIsFCorrect());
-    answers.add(answerF);
-
-    return answers;
+    return answersList;
   }
 
   public Question convertQuestionDtoToQuestion(QuestionDto questionDto) {
@@ -53,13 +34,12 @@ public class ProviderConverter {
     question.setApiId(questionDto.getId());
     question.setQuestion(questionDto.getQuestion());
 
-    AnswersDto answersDto = questionDto.getAnswers();
-    CorrectAnswersDto correctAnswersDto = questionDto.getCorrectAnswers();
-    List<Answer> answers = convertAnswersDtosToAnswerList(answersDto, correctAnswersDto);
+    Map<String, String> answers = questionDto.getAnswers();
+    Map<String, Boolean> correctAnswers = questionDto.getCorrectAnswers();
+    List<Answer> answersList = convertAnswersDtosToAnswerList(answers, correctAnswers);
 
-    question.setAnswers(answers);
+    question.setAnswers(answersList);
 
     return question;
   }
-
 }
