@@ -36,7 +36,7 @@ public class QuizController {
 
   @GetMapping(value = "/questions")
   public ResponseEntity<QuestionToShowDto> getRandomQuestion() {
-    Question randomQuestion = questionService.getRandom().get();
+    Question randomQuestion = questionService.getRandomQuestion();
     QuestionToShowDto questionToShowDto = converter.convertQuestionToQuizQuestionDto(randomQuestion);
     return new ResponseEntity<>(questionToShowDto, HttpStatus.OK);
   }
