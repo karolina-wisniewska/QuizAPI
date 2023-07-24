@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   quiz-app:
-    build: .
+    image: registry.gitlab.com/karolinawisniewska/dockertest/java/quizapi:v1
     restart: always
     container_name: quiz-app
     ports:
