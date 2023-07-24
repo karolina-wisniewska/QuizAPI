@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.kwisniewska.recruitmenttask.converter.ProviderConverter;
 import pl.kwisniewska.recruitmenttask.entity.Question;
-import pl.kwisniewska.recruitmenttask.provider.model.QuestionDto;
-import pl.kwisniewska.recruitmenttask.provider.service.ProviderService;
+import pl.kwisniewska.recruitmenttask.model.ProviderQuestionDto;
+import pl.kwisniewska.recruitmenttask.service.ProviderService;
 import pl.kwisniewska.recruitmenttask.service.QuestionService;
 
 import java.util.stream.IntStream;
@@ -26,8 +26,8 @@ public class RecruitmentTaskApplication {
   CommandLineRunner runner(ProviderService providerService, ProviderConverter providerConverter, QuestionService questionService) {
     return args -> IntStream.range(0,10)
             .forEach(i -> {
-              QuestionDto questionDto = providerService.getData();
-              Question question = providerConverter.convertQuestionDtoToQuestion(questionDto);
+              ProviderQuestionDto providerQuestionDto = providerService.getData();
+              Question question = providerConverter.convertQuestionDtoToQuestion(providerQuestionDto);
               questionService.save(question);
             });
   }

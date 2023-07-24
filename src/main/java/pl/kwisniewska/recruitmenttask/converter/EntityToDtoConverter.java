@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class EntityToDtoConverter {
 
-  private AnswerToShowDto convertAnswerToQuizAnswerDto(Answer answer) {
+  private AnswerToShowDto convertAnswerToAnswerToShowDto(Answer answer) {
     AnswerToShowDto answerToShowDto = new AnswerToShowDto();
     answerToShowDto.setId(answer.getId());
     answerToShowDto.setAnswer(answer.getAnswer());
@@ -26,7 +26,7 @@ public class EntityToDtoConverter {
     questionToShowDto.setQuestion(question.getQuestion());
     List<Answer> answers = question.getAnswers();
     List<AnswerToShowDto> answerDtos = answers.stream()
-            .map(answer -> convertAnswerToQuizAnswerDto(answer))
+            .map(answer -> convertAnswerToAnswerToShowDto(answer))
             .collect(Collectors.toList());
     questionToShowDto.setAnswers(answerDtos);
     return questionToShowDto;

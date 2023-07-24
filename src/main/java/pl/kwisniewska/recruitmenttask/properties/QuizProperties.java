@@ -1,4 +1,4 @@
-package pl.kwisniewska.recruitmenttask.provider;
+package pl.kwisniewska.recruitmenttask.properties;
 
 import lombok.Getter;
 import lombok.Setter;

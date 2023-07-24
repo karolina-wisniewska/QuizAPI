@@ -1,4 +1,4 @@
-package pl.kwisniewska.recruitmenttask.provider.model;
+package pl.kwisniewska.recruitmenttask.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class QuestionDto {
+public class ProviderQuestionDto {
 
   private Long id;
 
