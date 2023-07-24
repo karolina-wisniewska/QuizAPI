@@ -1,5 +1,6 @@
 package pl.kwisniewska.recruitmenttask.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,6 @@ import pl.kwisniewska.recruitmenttask.service.QuestionService;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 @RestController
@@ -35,7 +35,7 @@ public class QuizController {
   private final EntityToDtoConverter converter;
 
   @GetMapping(value = "/questions")
-  public ResponseEntity<QuestionToShowDto> getRandomQuestion() {
+  public ResponseEntity<QuestionToShowDto> showRandomQuestion() {
     Question randomQuestion = questionService.getRandomQuestion();
     QuestionToShowDto questionToShowDto = converter.convertQuestionToQuizQuestionDto(randomQuestion);
     return new ResponseEntity<>(questionToShowDto, HttpStatus.OK);
@@ -63,9 +63,8 @@ public class QuizController {
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(NoSuchElementException.class)
+  @ExceptionHandler(EntityNotFoundException.class)
   public ResponseEntity<String> handleQuestionNotFoundExceptions() {
-    String message = "Question not found";
-    return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 }

@@ -1,11 +1,11 @@
 package pl.kwisniewska.recruitmenttask.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.repository.AnswerRepository;
 
-import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +22,7 @@ public class AnswerService {
   public Set<Answer> findCorrectAnswersByQuestionId(Long questionId) {
     Set<Answer> allAnswers = answerRepository.findAnswersByQuestionId(questionId);
     if(allAnswers.isEmpty()){
-      throw new NoSuchElementException();
+      throw new EntityNotFoundException();
     }
     return allAnswers.stream()
             .filter(a -> a.isCorrect())

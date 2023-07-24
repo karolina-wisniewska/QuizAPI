@@ -1,12 +1,12 @@
 package pl.kwisniewska.recruitmenttask.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.repository.QuestionRepository;
 
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class QuestionService {
   }
 
   private Question findById(Long id) {
-    return questionRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    return questionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
   }
 
   private long count(){
