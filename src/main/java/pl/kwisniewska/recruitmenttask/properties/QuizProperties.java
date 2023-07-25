@@ -14,5 +14,6 @@ import org.springframework.stereotype.Component;
 public class QuizProperties {
 
   private String url;
+  private int numberOfQuestions;
 
 }
