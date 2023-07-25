@@ -23,6 +23,7 @@ public class QuestionServiceImpl implements QuestionService {
   private final QuestionRepository questionRepository;
   private final AnswerService answerService;
 
+  @Override
   public Question save(Question question) {
     question.getAnswers().stream()
             .filter(answer -> Objects.nonNull(answer.getAnswer()))
@@ -34,6 +35,7 @@ public class QuestionServiceImpl implements QuestionService {
     return questionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
   }
 
+  @Override
   public Question getRandomQuestion(){
     Long randomIndex = getRandomIndex();
     return findById(randomIndex);
@@ -49,6 +51,7 @@ public class QuestionServiceImpl implements QuestionService {
     return (long) (random.nextInt(size) + 1);
   }
 
+  @Override
   public boolean isQuestionPassed(Long questionId, Set<Long> answerIds) {
     Set<Answer> correctAnswers = answerService.findCorrectAnswersByQuestionId(questionId);
     Set<Long> correctAnswerIds = correctAnswers.stream()

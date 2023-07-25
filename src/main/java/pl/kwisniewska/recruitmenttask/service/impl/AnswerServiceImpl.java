@@ -20,6 +20,7 @@ public class AnswerServiceImpl implements AnswerService {
     return answerRepository.save(answer);
   }
 
+  @Override
   public Set<Answer> findCorrectAnswersByQuestionId(Long questionId) {
     Set<Answer> correctAnswers = answerRepository.findAnswersByQuestionId(questionId);
     if(correctAnswers.isEmpty()){
