@@ -3,7 +3,7 @@ package pl.kwisniewska.recruitmenttask;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = RecruitmentTaskApplicationTests.class)
+@SpringBootTest(classes = RecruitmentTaskApplication.class)
 class RecruitmentTaskApplicationTests {
 
   @Test
