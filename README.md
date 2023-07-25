@@ -21,6 +21,9 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
+      <ul>
+        <li><a href="#about-solution">Remarks On Task Solution</a></li>
+      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -38,12 +41,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The application uses questions and answers data from https://quizapi.io/. Ten questions with answers are loaded at 
+The application uses questions from https://quizapi.io/. Ten questions with answers are loaded and saved to database at 
 the start of the application.
 
 REST API has two endpoints:
-- GET /api/questions to get random question with possible answers
-- POST /api/answers to answer question and find out whether the answer was correct
+- GET **/api/questions** to get random question with possible answers
+- POST **/api/answers** to answer question and get message whether the answer was correct
 
 Full API documentation is provided by Swagger after installation. 
 
@@ -60,6 +63,30 @@ Full API documentation is provided by Swagger after installation.
 * OpenApi 3 (Swagger)
 * JUnit
 * IntelliJ IDEA
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a id="about-solution"></a>
+### Remarks On Task Solution
+
+1. **Schema creation scripts:** there are two scripts in **/init** directory: 
+   * **schema.sql** that creates database and is used by docker to create mysql container
+   * **schema-with-tables.sql** that creates database and required tables
+   
+
+2. **Saving questions to database:** when saving a question from https://quizapi.io/ to the database,
+  there is no check if the question already exists in the database so questions can be potentially duplicated.
+  To solve this, the CommandLineRunner could use while loop to save questions until ten distinct questions are saved.
+  Saving a question could use checking if the question already exists by **FindByApiId** method in **QuestionRepository**.
+ 
+
+3. **Getting random question from database:** if it cannot be assumed that question ids are unremovable, to obtain random 
+  question we could:
+   * get all questions from the database to a **list**;
+   * get **random number** from between zero and (**list** size - 1)
+   * get the element of the **list** on position **random number**
+   
+
+4. **Docker-compose:** uses image from Gitlab repository which does not include testing
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a id="getting-started"></a>
@@ -109,7 +136,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/karolina-wisniewska/QuizAPI/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/karolina-wi
 
