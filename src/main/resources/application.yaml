@@ -13,3 +13,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 quiz-api:
   url: https://quizapi.io/api/v1/questions?apiKey=NQJpUGZ7hs2FpzZuytJiwGvL31eWD010eANEPZEi&limit=1
+  number-of-questions: 10
