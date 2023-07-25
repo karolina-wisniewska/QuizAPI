@@ -45,7 +45,7 @@ class QuizControllerMockServiceTest {
 
     // then
     assertThat(questionResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(expected.equals(questionResponse.getBody()));
+    assertThat(expected.equals(questionResponse.getBody())).isTrue();
   }
 
   @Test
@@ -62,7 +62,7 @@ class QuizControllerMockServiceTest {
 
     // then
     assertThat(answerResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(expected.equals(answerResponse.getBody()));
+    assertThat(expected.equals(answerResponse.getBody())).isTrue();
   }
 
   @Test
@@ -72,14 +72,14 @@ class QuizControllerMockServiceTest {
     AnswerToCheckDto answer = new AnswerToCheckDto(answers, 1L);
     given(questionService.isQuestionPassed(answer.getQuestionId(), answer.getAnswers()))
             .willReturn(false);
-    CheckDto expected = new CheckDto(true);
+    CheckDto expected = new CheckDto(false);
 
     // when
     ResponseEntity<CheckDto> answerResponse = restTemplate.postForEntity("/api/answers", answer, CheckDto.class);
 
     // then
     assertThat(answerResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(expected.equals(answerResponse.getBody()));
+    assertThat(expected.equals(answerResponse.getBody())).isTrue();
   }
 
   @Test
