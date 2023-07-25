@@ -1,10 +1,11 @@
-package pl.kwisniewska.recruitmenttask.service;
+package pl.kwisniewska.recruitmenttask.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.kwisniewska.recruitmenttask.properties.QuizProperties;
 import pl.kwisniewska.recruitmenttask.model.ProviderQuestionDto;
+import pl.kwisniewska.recruitmenttask.service.ProviderService;
 
 @Service
 @RequiredArgsConstructor

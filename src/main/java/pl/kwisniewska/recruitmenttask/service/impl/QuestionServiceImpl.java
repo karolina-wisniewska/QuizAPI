@@ -1,4 +1,4 @@
-package pl.kwisniewska.recruitmenttask.service;
+package pl.kwisniewska.recruitmenttask.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +7,8 @@ import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.entity.Question;
 import pl.kwisniewska.recruitmenttask.properties.QuizProperties;
 import pl.kwisniewska.recruitmenttask.repository.QuestionRepository;
+import pl.kwisniewska.recruitmenttask.service.AnswerService;
+import pl.kwisniewska.recruitmenttask.service.QuestionService;
 
 import java.util.Objects;
 import java.util.Random;

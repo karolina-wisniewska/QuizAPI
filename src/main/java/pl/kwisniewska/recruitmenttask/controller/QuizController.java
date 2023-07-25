@@ -64,7 +64,7 @@ public class QuizController {
   }
 
   @ExceptionHandler(EntityNotFoundException.class)
-  public ResponseEntity<String> handleQuestionNotFoundExceptions() {
+  public ResponseEntity<String> handleEntityNotFoundExceptions() {
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 }

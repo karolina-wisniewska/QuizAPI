@@ -1,10 +1,11 @@
-package pl.kwisniewska.recruitmenttask.service;
+package pl.kwisniewska.recruitmenttask.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
 import pl.kwisniewska.recruitmenttask.repository.AnswerRepository;
+import pl.kwisniewska.recruitmenttask.service.AnswerService;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,11 +21,11 @@ public class AnswerServiceImpl implements AnswerService {
   }
 
   public Set<Answer> findCorrectAnswersByQuestionId(Long questionId) {
-    Set<Answer> allAnswers = answerRepository.findAnswersByQuestionId(questionId);
-    if(allAnswers.isEmpty()){
+    Set<Answer> correctAnswers = answerRepository.findAnswersByQuestionId(questionId);
+    if(correctAnswers.isEmpty()){
       throw new EntityNotFoundException();
     }
-    return allAnswers.stream()
+    return correctAnswers.stream()
             .filter(a -> a.isCorrect())
             .collect(Collectors.toSet());
   }
