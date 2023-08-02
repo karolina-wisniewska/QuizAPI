@@ -1,6 +1,7 @@
 package pl.kwisniewska.recruitmenttask.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.kwisniewska.recruitmenttask.entity.Answer;
@@ -16,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
