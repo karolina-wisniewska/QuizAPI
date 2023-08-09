@@ -19,14 +19,13 @@ import java.util.stream.IntStream;
 @OpenAPIDefinition(info = @Info(title = "Quiz API", version = "1.0", description = "API for solving quizzes"))
 public class RecruitmentTaskApplication {
 
-
   public static void main(String[] args) {
     SpringApplication.run(RecruitmentTaskApplication.class, args);
   }
 
   @Bean
   CommandLineRunner runner(ProviderService providerService, ProviderConverter providerConverter, QuestionService questionService, QuizProperties quizProperties) {
-    return args -> IntStream.range(0,quizProperties.getNumberOfQuestions())
+    return args -> IntStream.range(0, quizProperties.getNumberOfQuestions())
             .forEach(i -> {
               ProviderQuestionDto providerQuestionDto = providerService.getData();
               Question question = providerConverter.convertQuestionDtoToQuestion(providerQuestionDto);
