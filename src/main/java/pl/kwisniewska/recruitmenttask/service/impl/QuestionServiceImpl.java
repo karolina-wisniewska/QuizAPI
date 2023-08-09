@@ -34,7 +34,8 @@ public class QuestionServiceImpl implements QuestionService {
   }
 
   private Question findById(Long id) {
-    return questionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    return questionRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Question number " + id + "does not exist"));
   }
 
   @Override
@@ -43,10 +44,6 @@ public class QuestionServiceImpl implements QuestionService {
     return findById(randomIndex);
   }
 
-  // Jeżeli nie można założyć, że identyfikatory są narastające i nie da się ich usuwać, można przykładowo:
-  // 1. Pobrać z bazy wszystkie pytania do kolekcji 'availableQuestions'
-  // 2. Wylosować liczbę 'randomId' z zakresu <0, rozmiar kolekcji 'availableQuestions' - 1>
-  // 3. Pobrać i zwrócić wartość 'questionId'' z pozycji 'randomId'
   private Long getRandomIndex(){
     int size = quizProperties.getNumberOfQuestions();
     Random random = new Random();
