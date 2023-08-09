@@ -18,15 +18,15 @@ public class AnswerServiceImpl implements AnswerService {
 
   private final AnswerRepository answerRepository;
 
-  public Answer save(Answer answer){
+  public Answer save(Answer answer) {
     return answerRepository.save(answer);
   }
 
   @Override
   public Set<Answer> findCorrectAnswersByQuestionId(Long questionId) {
     Set<Answer> correctAnswers = answerRepository.findAnswersByQuestionId(questionId);
-    if(correctAnswers.isEmpty()){
-      throw new EntityNotFoundException();
+    if (correctAnswers.isEmpty()) {
+      throw new EntityNotFoundException("Question number " + questionId + " does not exist");
     }
     return correctAnswers.stream()
             .filter(a -> a.isCorrect())
