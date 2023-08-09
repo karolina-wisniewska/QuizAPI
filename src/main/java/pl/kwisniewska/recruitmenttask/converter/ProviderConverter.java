@@ -18,7 +18,7 @@ public class ProviderConverter {
     Iterator<Map.Entry<String, String>> iter1 = answers.entrySet().iterator();
     Iterator<Map.Entry<String, Boolean>> iter2 = correctAnswers.entrySet().iterator();
 
-    while(iter1.hasNext() && iter2.hasNext()) {
+    while (iter1.hasNext() && iter2.hasNext()) {
       Map.Entry<String, String> e1 = iter1.next();
       Map.Entry<String, Boolean> e2 = iter2.next();
       Answer answer = new Answer();
